@@ -1,7 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import CompanyCard from "./components/CompanyCard";
-
 const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
 // const symbols = [
 //   'NTDOY', 'NTES', 'EA', 'TTWO', 'RBLX', 'NEXOY', 'CCOEY', 'BILI', 
@@ -38,30 +34,3 @@ const fetchAllCompanyProfiles = async () => {
   }
   return profiles; // Return the collected profiles
 };
-
-export default async function Home() {
-  const companyProfiles = await fetchAllCompanyProfiles();
-  console.log('companyProfiles:', companyProfiles);
-  return (
-    <main className="flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold">Home</h1>
-      <Link href="/detailedStockPage/1" className="text-blue-500 hover:underline">Stock1</Link>
-      <Link href="/testingPage1" className="text-blue-500 hover:underline">Testing Page 1 to test components</Link>
-      <Link href="/testingPage2" className="text-blue-500 hover:underline">Testing Page 2 to test components</Link>
-
-      <h1 className="text-3xl font-bold">List of Company Stocks</h1>
-      {
-        companyProfiles.map((profile) => {
-          return (
-            <CompanyCard
-              key={profile.ticker}
-              ticker={profile.ticker}
-              companyName={profile.name}
-              stockValue={profile.shareOutstanding}
-            />
-          );
-        })
-      }
-    </main>
-  );
-}
