@@ -10,24 +10,45 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
+    --foreground-rgb: 201, 201, 201;
     --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-end-rgb: 000, 0, 0;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #101010;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .fade-in {
+    animation: fadeIn 2s ease-in-out;
+  }
+}
+
+.card {
+  padding: 1rem;
+  margin-right: 20px;
+  font-size: 25px;
+  border: 2px solid #383839;
+  animation: fadeIn;
+}
+
+.purple-text {
+  color: #5D5EEF;
+}
+
+@keyframes fadeIn{
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
   }
 }
