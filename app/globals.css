@@ -26,10 +26,15 @@ body {
     text-wrap: balance;
   }
 
+  .slide-down {
+    animation: slide-down 2s ease-in-out;
+  }
+
   .fade-in {
     animation: fadeIn 2s ease-in-out;
   }
 }
+
 
 .card {
   padding: 1rem;
@@ -50,5 +55,14 @@ body {
 
   to {
       opacity: 1;
+  }
+}
+
+@keyframes slide-down{
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%)
   }
 }
