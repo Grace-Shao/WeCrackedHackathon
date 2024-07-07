@@ -26,15 +26,15 @@ export default async function ViewStock({ params }) {
   const quote = await getQuote(id);
   const news = await getNews(id);
   return (
-    <div className="max-w-full mx-auto py-8 px-4 bg-gray-900">
-    <div className="mb-10">
-      <h1 className="text-4xl font-bold text-white mb-4">{id} Quote Price</h1>
+    <div className="flex items-start max-w-full mx-auto py-8 px-4 bg-gray-900">
+    <div className="mb-10 mr-8">
+      <h1 className="text-4xl font-bold text-white mb-4">{id} Quote</h1>
       <p className="text-2xl text-gray-300">Current Price: <span className="font-semibold text-white">{quote.c}</span></p>
       <p className="text-2xl text-gray-300">High: <span className="font-semibold text-white">{quote.h}</span></p>
       <p className="text-2xl text-gray-300">Low: <span className="font-semibold text-white">{quote.l}</span></p>
     </div>
     <div>
-      <h1 className="text-4xl font-bold text-white mb-6">News</h1>
+      <h1 className="text-4xl font-bold text-white mb-6">Company News</h1>
       <ul>
         {news.map((article, key) => (
           <li key={key} className="max-w-4xl mb-4 bg-gray-800 shadow-lg rounded-lg overflow-hidden">
