@@ -12,7 +12,7 @@ export default function CompanyCard(props: CompanyCardProps) {
   const { ticker, companyName, stockValue, logo } = props;
 
   return (
-    <div className="p-4 border border-slate-300 my-3 flex gap-5 items-center bg-gray-800 rounded-lg">
+    <div className="p-4 border-2 border-slate-200 my-3 flex gap-5 items-center rounded-lg" style={{ backgroundColor: '#1D1D1F' }}>
       <Image
         src={logo}
         alt={`${companyName} Logo`}

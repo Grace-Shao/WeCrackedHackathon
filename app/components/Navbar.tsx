@@ -7,15 +7,15 @@ export default function Navbar() {
         <nav className="bg-grey bg-opacity-70 shadow-md">
             <div className="container mx-auto px-6 py-4 flex justify-center">
                 <div className="flex items-center space-x-8">
-                    <Image src="/gamestock2.png" alt="GameStock Logo" width={60} height={60} />
+                    <Image src="/gamestock logo.png" alt="GameStock Logo" width={60} height={60} />
                     <Link legacyBehavior href="/">
-                        <a className="text-lg text-black-800 hover:text-white-600">Home</a>
+                        <a className="text-lg hover:text-white hover:underline"  style={{ color: '#C9C9BD' }}>Home</a>
                     </Link>
                     <Link legacyBehavior href="/listOfCompaniesPage">
-                        <a className="text-lg text-black-800 hover:text-white-600">Explore</a>
+                        <a className="text-lg text-black-800 hover:text-white hover:underline"  style={{ color: '#C9C9BD' }}>Explore</a>
                     </Link>
                     <Link legacyBehavior href="/contact-us">
-                        <a className="text-lg text-black-800 hover:text-white-600">Contact Us</a>
+                        <a className="text-lg hover:text-white hover:underline"  style={{ color: '#C9C9BD' }}>Contact</a>
                     </Link>
                 </div>
             </div>

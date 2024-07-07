@@ -24,7 +24,7 @@ export default function Home() {
       
         <h2>
           <div className="flex justify-center " style={{ fontSize: '1.5rem'}}>
-            <div className = "slide-down">
+            <div className="slide-down" style={{ color: '#C9C9BD' }}>
             Power up your portfolio with video game stock investments. Roblox, Nintendo, etc.
             
             </div>
