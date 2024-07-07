@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CompanyCard from "./components/CompanyCard";
+import Navbar from "./components/Navbar";
 
 const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
 const symbols = [
@@ -49,6 +50,7 @@ export default async function Home() {
   console.log('companyProfiles:', companyProfiles);
   return (
     <main className="flex flex-col items-center justify-center">
+      <Navbar />
       <h1 className="text-3xl font-bold">Home</h1>
       <Link href="/detailedStockPage/1" className="text-blue-500 hover:underline">Stock1</Link>
       <Link href="/testingPage1" className="text-blue-500 hover:underline">Testing Page 1 to test components</Link>
