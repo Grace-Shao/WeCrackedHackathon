@@ -14,7 +14,7 @@ export default function Navbar() {
                     <Link legacyBehavior href="/listOfCompaniesPage">
                         <a className="text-lg text-black-800 hover:text-white hover:underline"  style={{ color:'#C9C9BD'}}>Explore</a>
                     </Link>
-                    <Link legacyBehavior href="/contact-us">
+                    <Link legacyBehavior href="/contact">
                     <a className="text-lg hover:underline hover:text-pink-400" style={{ color: '#C9C9BD' }}>Contact</a>
                     </Link>
                 </div>

@@ -1,41 +1,46 @@
+import Navbar from "./Navbar";
+
 // components/ContactSection.js
 export default function ContactSection() {
     const contacts = [
         {
-            title: 'Technical support',
-            description: 'Already using our products and experiencing technical issues?',
-            linkText: 'Find helpful resources',
+            title: 'Frontend',
+            description: 'Grace, Kelechi, Alex',
+            linkText: 'Contact us',
             imgSrc: '/support.png'
         },
         {
-            title: 'Pricing, billing & licensing',
-            description: 'Have a pricing question or need help managing your account?',
-            linkText: 'Find answers',
+            title: 'Backend',
+            description: 'Sai, Grace',
+            linkText: 'We are friendly',
             imgSrc: '/billing.png'
         },
         {
-            title: 'Product advice',
-            description: 'Evaluating our products and need advice before you buy?',
-            linkText: 'View product demos',
+            title: 'Video',
+            description: 'Grace, Kelechi, Alex',
+            linkText: 'Thank you!!',
             imgSrc: '/advice.png'
-        }
+        },
+        
     ];
 
     return (
-        <section className="bg-white py-16">
+        <div>
+        <Navbar />
+        <section className="bg-black py-16">
             <div className="container mx-auto text-center">
-                <h2 className="text-3xl font-bold mb-8">Our teams are here to help</h2>
+                <h2 className="text-3xl font-bold mb-8 text-white">Our teams are here to help</h2>
                 <div className="flex justify-center space-x-8">
                     {contacts.map((contact, index) => (
-                        <div key={index} className="max-w-sm bg-gray-100 rounded-lg p-6">
-                            <img src={contact.imgSrc} alt={contact.title} className="mx-auto mb-4"/>
-                            <h3 className="text-xl font-bold mb-2">{contact.title}</h3>
-                            <p className="mb-4">{contact.description}</p>
-                            <a href="#" className="text-blue-500 hover:underline">{contact.linkText}</a>
+                        <div key={index} className="max-w-sm bg-gray-800 rounded-lg p-6">
+                            <h3 className="text-xl font-bold mb-2 text-white">{contact.title}</h3>
+                            <p className="mb-4 text-white">{contact.description}</p>
+                            <a href="#" className="text-blue-500 hover:underline text-white">{contact.linkText}</a>
                         </div>
                     ))}
                 </div>
             </div>
         </section>
+        </div>
     );
 }
