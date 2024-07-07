@@ -1,74 +1,76 @@
 import Image from "next/image";
 import Link from "next/link";
-import CompanyCard from "./components/CompanyCard";
+import gamestock1 from "../public/gamestock1.png";
 import Navbar from "./components/Navbar";
 
-const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
-const symbols = [
-  'BILI', 'BHAT', 'CCOEY', 'DDI', 'EA', 'GDC', 'GMGI', 'GRVY', 'GXAI',
-  'MSGM', 'MYPS', 'NEXOY', 'NTDOY', 'NTES', 'PLTK', 'RBLX', 'SKLZ',
-  'SOHU', 'TRUG', 'TTWO', 'UBSFY'
-];
-
-// Define the API endpoint
-const fetchCompanyProfile = async (symbol) => {
-  const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
-  try {
-    const response = await fetch(url);
-    const data = await response.json(); // Ensure this waits for the JSON to be read
-    //console.log(`${symbol}:`, data);
-    return data;
-  } catch (error) {
-    console.error(`Error fetching company profile for ${symbol}:`, error);
-    return null;
-  }
-};
-
-const fetchAllCompanyProfiles = async () => {
-  try {
-    // Map each symbol to a fetch promise, catching errors individually to avoid one failure causing all to fail
-    const fetchPromises = symbols.map(symbol =>
-      fetchCompanyProfile(symbol).catch(error => {
-        console.error(`Error fetching profile for ${symbol}:`, error);
-        return null; // Return null or an appropriate value for failed requests
-      })
-    );
-
-    // Use Promise.all to wait for all fetches to complete
-    const profiles = await Promise.all(fetchPromises);
-
-    // Filter out null values in case some requests failed
-    return profiles.filter(profile => profile !== null);
-  } catch (error) {
-    console.error("Error fetching company profiles:", error);
-    return [];
-  }
-};
-
-export default async function Home() {
-  const companyProfiles = await fetchAllCompanyProfiles();
-  console.log('companyProfiles:', companyProfiles);
+export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center">
+    <main>
       <Navbar />
-      <h1 className="text-3xl font-bold">Home</h1>
-      <Link href="/detailedStockPage/1" className="text-blue-500 hover:underline">Stock1</Link>
-      <Link href="/testingPage1" className="text-blue-500 hover:underline">Testing Page 1 to test components</Link>
-      <Link href="/testingPage2" className="text-blue-500 hover:underline">Testing Page 2 to test components</Link>
+      <h1 className="flex flex-col items-center justify-center text=2xl">
 
-      <h1 className="text-3xl font-bold">List of Company Stocks</h1>
-      {
-        companyProfiles.map((profile) => {
-          return (
-            <CompanyCard
-              key={profile.ticker}
-              ticker={profile.ticker}
-              companyName={profile.name}
-              stockValue={profile.shareOutstanding}
-            />
-          );
-        })
-      }
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+      <div >
+        <Image src= "/gamestock2.png" alt = "GameStock Logo" 
+          width={700} height={500} layout="fixed"/>
+          <br></br>
+      </div>
+      </h1>
+      
+        <h2>
+          <div className="flex justify-center " style={{ fontSize: '1.5rem'}}>
+            <div className = "slide-down">
+            Power up your portfolio with video game stock investments. Roblox, Nintendo, etc.
+            
+            </div>
+          </div>
+          
+        <div className="fade-in">
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="flex space-x-4 fade-in p-4 justify-center">
+          <div className="card rounded-lg ">
+            <Link href="/listOfCompaniesPage">
+              <button className="text-white py-2 px-4 rounded 
+              mr-2 bg-grey-900 hover:bg-pink-500 hover:scale-105 transition-all duration-300"
+              >Explore Stocks!</button>
+            </Link>
+          </div>
+          </div>
+          </div>
+      </h2>
+      <section className="py-8 text-center">
+        <div className="flex items-center justify-center space-x-8">
+          <div className="marine-invest">
+            <br></br>
+            <br>
+            </br>
+            <Image src="/row.png" alt="Roblox Logo" width={70} height={70} />
+          </div>
+          <div className="marine-invest">
+            <Image src="/blizz.png" alt="Blizzard Logo" width={70} height={70} />
+          </div>
+          <div className="marine-invest">
+            <Image src="/nv.png" alt="Nvidia Logo" width={70} height={70} />
+          </div>
+          <div className="marine-invest">
+            <Image src="/taketwo.png" alt="Take Two" width={70} height={70} />
+          </div>
+          <br></br>
+          <div className="marine-invest">
+            <Image src="/ubisoft.png" alt="Ubisoft" width={70} height={70} />
+          </div>  
+        </div>
+      </section>
+
+      
+
     </main>
   );
 }

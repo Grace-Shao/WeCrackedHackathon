@@ -8,14 +8,11 @@ export default function Navbar() {
                     <Link legacyBehavior href="/">
                         <a className="hover:underline text-white font-mono">home </a>
                     </Link>
-                    <Link legacyBehavior href="/explore">
+                    <Link legacyBehavior href="/listOfCompaniesPage">
                         <a className="hover:underline text-white font-mono">explore </a>
                     </Link> 
                     <Link legacyBehavior href="/contact">
                         <a className="hover:underline text-white font-mono">contact </a>
-                    </Link>
-                    <Link legacyBehavior href="/news">
-                        <a className="hover:underline text-white font-mono">news </a>
                     </Link>
                 </div>
             </div>
