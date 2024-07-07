@@ -25,19 +25,76 @@ const fetchCompanyProfile = async (symbol) => {
     }
   };
 
-export async function GET() {
-    const profiles = [];
+// Import necessary modules
+import { NextApiRequest, NextApiResponse } from 'next';
+import yahooFinance from 'yahoo-finance2';
+import { NextResponse } from 'next/server';
+
+// Define the symbols you want to fetch data for
+const symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA'];
+
+// Placeholder function for fetching company profile
+async function fetchCompanyProfile(symbol) {
+  // Simulate an API call to fetch company profile data
+  // Replace this with your actual implementation
+  return {
+    symbol,
+    name: `Company ${symbol}`,
+    marketCap: Math.floor(Math.random() * 1000000),
+  };
+}
+
+// Handler function to fetch data for a single symbol
+async function fetchSymbolData(symbol, period) {
+  const toDate = new Date();
+  const periods = {
+    '1d': 1,
+    '1w': 7,
+    '1m': 30,
+    '6m': 180,
+    '1y': 365,
+    '5y': 1825,
+  };
+
+  const days = periods[period] || periods['1y'];
+  const fromDate = new Date(toDate);
+  fromDate.setDate(toDate.getDate() - days);
+
+  const queryOptions = {
+    period1: fromDate.toISOString(),
+    period2: toDate.toISOString(),
+  };
+
+  // Fetch historical data
+  const historicalData = await yahooFinance.historical(symbol, queryOptions);
+
+  // Fetch company profile
+  const profile = await fetchCompanyProfile(symbol);
+
+  // Combine historical data and profile
+  return {
+    symbol,
+    profile,
+    historicalData,
+  };
+}
+
+// API route handler
+export async function GET(req, res) {
+  const { period } = req.query;
+  const results = [];
+
+  try {
     for (const symbol of symbols) {
-        const profile = await fetchCompanyProfile(symbol);
-        if (profile) { // Ensure only successful responses are added
-        profiles.push(profile);
-        }
-        // Adding a delay to avoid hitting rate limits
-        await new Promise(resolve => setTimeout(resolve, 1000));
+      const result = await fetchSymbolData(symbol, period);
+      results.push(result);
+      // Adding a delay to avoid hitting rate limits
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-    console.log('profiles:', profiles);
-    Promise.all(profiles);
-    return NextResponse.json({profiles}); // Return the collected profiles
-} 
 
-
+    // Return the combined results
+    return NextResponse.json({ results });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
