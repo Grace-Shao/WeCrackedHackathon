@@ -35,6 +35,28 @@ body {
   }
 }
 
+.button {
+  background-color: #333;
+  color: white;
+  transition: background-color 0.3s ease;
+  transform: scale(1.2);
+}
+
+.hover-gradient {
+  background: linear-gradient(to top, #EC4899, #F497C7);
+}
+
+.top-right {
+  position: absolute;
+  margin-top: -15px;
+  margin-left: 925px;
+}
+
+
+
+.button:hover {
+  background-color: #555;
+}
 
 .card {
   padding: 1rem;
@@ -56,6 +78,10 @@ body {
   to {
       opacity: 1;
   }
+}
+
+.fade-in{
+  animation: fadeIn 2s ease-in-out
 }
 
 @keyframes slide-down{
