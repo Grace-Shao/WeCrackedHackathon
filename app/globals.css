@@ -4,21 +4,25 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 238, 238, 238;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 201, 201, 201;
     --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 000, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
+}
+html {
+  height: 100%;
 }
 
 body {
+  height: 100%;
   color: rgb(var(--foreground-rgb));
-  background-color: #101010;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(238, 238, 238, 1) 150%);
 }
 
 @layer utilities {
@@ -52,8 +56,6 @@ body {
   margin-left: 925px;
 }
 
-
-
 .button:hover {
   background-color: #555;
 }
@@ -70,25 +72,25 @@ body {
   color: #5D5EEF;
 }
 
-@keyframes fadeIn{
+@keyframes fadeIn {
   from {
-      opacity: 0;
+    opacity: 0;
   }
 
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
-.fade-in{
-  animation: fadeIn 2s ease-in-out
+.fade-in {
+  animation: fadeIn 2s ease-in-out;
 }
 
-@keyframes slide-down{
+@keyframes slide-down {
   from {
     transform: translateY(-100%);
   }
   to {
-    transform: translateY(0%)
+    transform: translateY(0%);
   }
 }
