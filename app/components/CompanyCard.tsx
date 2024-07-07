@@ -12,7 +12,10 @@ export default function CompanyCard(props: CompanyCardProps) {
   const { ticker, companyName, stockValue, logo } = props;
 
   return (
-    <div className="p-4 border-2 border-slate-200 my-3 flex gap-5 items-center rounded-lg" style={{ backgroundColor: '#1D1D1F' }}>
+    <div
+      className="p-4 border-4 border-slate-200 my-3 flex gap-5 items-center rounded-lg hover:scale-105 transition-transform duration-500"
+      style={{ backgroundColor: '#1D1D1F',   borderColor: '#383839' }}
+    >
       <Image
         src={logo}
         alt={`${companyName} Logo`}
@@ -20,10 +23,10 @@ export default function CompanyCard(props: CompanyCardProps) {
         height={50}
         className="flex-shrink-0"
       />
-      <Link href={`/detailedStockPage/${ticker}`} className="flex-grow">
+      <Link href={`/detailedStockPage/${ticker}`} className="flex-grow ">
 
         <div>
-          <h1 className="font-bold text-2xl">{companyName}</h1>
+          <h1 className="font-bold text-2xl ">{companyName}</h1>
           <p>{`${ticker} Share Outstanding: ${stockValue}`}</p>
         </div>
       </Link>

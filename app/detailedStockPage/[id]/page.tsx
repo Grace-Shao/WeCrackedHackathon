@@ -74,7 +74,7 @@ export default function ViewStock() {
   }, [id, period]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+  <div className="min-h-screen bg-gray-900 text-white" style={{ backgroundColor: '#101010' }}>
       <Navbar />
       <div className="container mx-auto py-8 px-4 flex flex-wrap">
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
@@ -113,7 +113,8 @@ export default function ViewStock() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {news.length > 0 ? (
               news.map((article, i) => (
-                <div key={i} className="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+                <div key={i} className="border-4 shadow-lg rounded-lg overflow-hidden border-slate-300 hover:scale-105 transition-transform duration-500"
+  style={{ backgroundColor: '#1D1D1F', borderColor: '#383839', margin: '10px' }}>
                   <div className="p-6">
                     <h2 className="text-2xl font-bold text-white mb-2">
                       <a href={article.url} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition duration-300 ease-in-out text-white">{article.headline}</a>
