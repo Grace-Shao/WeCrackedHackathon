@@ -42,10 +42,12 @@ export default async function Home() {
   const companyProfiles = await fetchAllCompanyProfiles();
   console.log('companyProfiles:', companyProfiles);
   return (
-    <main className="flex flex-col items-center justify-center bg-gray-900 text-white min-h-screen">
+<main style={{ backgroundColor: '#101010' }} className="flex flex-col items-center justify-center text-white min-h-screen ">
       <Navbar />
-      <h1 className="text-3xl font-bold my-8">List of Company Stocks</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-4/5">
+      <h1 className="text-3xl font-bold my-8" style={{ color: '#C9C9C9' }}>
+  List of Video Game Company Stocks
+</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-4/5" style = {{margin: '10px'}}>
         {companyProfiles.map((profile) => (
           <CompanyCard
             key={profile.ticker}
