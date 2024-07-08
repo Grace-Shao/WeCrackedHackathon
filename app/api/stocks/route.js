@@ -12,7 +12,7 @@ const periods = {
 };
 
 // API route handler
-export default function handler(req, res) {
+export default function GET(req, res) {
   if (req.method === 'GET') {
     return res.status(200).json(periods);
   } else {
