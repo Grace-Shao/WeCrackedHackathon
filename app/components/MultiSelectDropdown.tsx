@@ -1,15 +1,14 @@
-// components/MultiSelectDropdown.tsx
 import React from 'react';
 import Select from 'react-select';
 
 // Define the type for the options
-interface Option {
+export type Option = {
   value: string;
   label: string;
-}
+};
 
 // Define the props type for the component
-interface MultiSelectDropdownProps {
+export interface MultiSelectDropdownProps {
   selectedOptions: Option[];
   setSelectedOptions: React.Dispatch<React.SetStateAction<Option[]>>;
 }
