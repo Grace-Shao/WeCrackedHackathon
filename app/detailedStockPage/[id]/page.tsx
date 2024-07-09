@@ -7,7 +7,11 @@ import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-const fetchCompanyProfile = async ({symbol}:{symbol:any}) => {
+interface FetchParams {
+  symbol: string;
+}
+
+const fetchCompanyProfile = async ({ symbol }: FetchParams) => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
   try {
     const response = await fetch(url);
@@ -19,25 +23,25 @@ const fetchCompanyProfile = async ({symbol}:{symbol:any}) => {
   }
 };
 
-const fetchQuote = async ({symbol}:{symbol:any}) => {
+const fetchQuote = async ({ symbol }: FetchParams) => {
   const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchNews = async ({symbol}:{symbol:any}) => {
+const fetchNews = async ({ symbol }: FetchParams) => {
   const url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2024-06-01&to=2024-07-01&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchFinancials = async ({symbol}:{symbol:any}) => {
+const fetchFinancials = async ({ symbol }: FetchParams) => {
   const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchHistoricalData = async ({symbol}:{symbol:any}) => {
+const fetchHistoricalData = async ({ symbol }: FetchParams) => {
   const url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (!response.ok) {
@@ -59,11 +63,14 @@ export default function ViewStock() {
 
   useEffect(() => {
     if (id) {
-      fetchQuote(id).then(setQuote);
-      fetchNews(id).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
-      fetchCompanyProfile(id).then(setProfile);
-      fetchFinancials(id).then(setFinancials);
-      fetchHistoricalData(id, period).then(data => {
+      const symbol = typeof id === 'string' ? id : id[0]; // Ensure id is a string
+      const fetchParams = { symbol };
+
+      fetchQuote(fetchParams).then(setQuote);
+      fetchNews(fetchParams).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
+      fetchCompanyProfile(fetchParams).then(setProfile);
+      fetchFinancials(fetchParams).then(setFinancials);
+      fetchHistoricalData(fetchParams).then(data => {
         if (Array.isArray(data)) {
           setHistoricalData(data);
         } else {
@@ -74,7 +81,7 @@ export default function ViewStock() {
   }, [id, period]);
 
   return (
-  <div className="min-h-screen bg-gray-900 text-white" style={{ backgroundColor: '#101010' }}>
+    <div className="min-h-screen bg-gray-900 text-white" style={{ backgroundColor: '#101010' }}>
       <Navbar />
       <div className="container mx-auto py-8 px-4 flex flex-wrap">
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
@@ -114,7 +121,7 @@ export default function ViewStock() {
             {news.length > 0 ? (
               news.map((article, i) => (
                 <div key={i} className="border-4 shadow-lg rounded-lg overflow-hidden border-slate-300 hover:scale-105 transition-transform duration-500"
-  style={{ backgroundColor: '#1D1D1F', borderColor: '#383839', margin: '10px' }}>
+                  style={{ backgroundColor: '#1D1D1F', borderColor: '#383839', margin: '10px' }}>
                   <div className="p-6">
                     <h2 className="text-2xl font-bold text-white mb-2">
                       <a href={article.url} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition duration-300 ease-in-out text-white">{article.headline}</a>
