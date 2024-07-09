@@ -1,5 +1,5 @@
 const fetchQuote = async (symbol) => {
-  const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
+
   const url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
 
