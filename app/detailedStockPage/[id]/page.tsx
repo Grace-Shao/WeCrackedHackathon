@@ -9,6 +9,34 @@ import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 const API_KEY = String(process.env.REACT_APP_API_KEY);
 
 
+interface FetchParams {
+  symbol: string;
+}
+
+interface Quote {
+  c: number;
+  h: number;
+  l: number;
+  o: number;
+  pc: number;
+}
+
+interface NewsArticle {
+  headline: string;
+  summary: string;
+  url: string;
+}
+
+interface Financials {
+  // Define the structure of financials data
+}
+
+interface Profile {
+  ticker: string;
+  name: string;
+  shareOutstanding: number;
+  logo: string;
+}
 
 export default function ViewStock() {
 
