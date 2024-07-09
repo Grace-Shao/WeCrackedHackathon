@@ -2,7 +2,8 @@ import { NextResponse, NextRequest } from 'next/server';
 import yahooFinance from 'yahoo-finance2';
 import { setTimeout } from 'timers/promises';
 
-const API_KEY = process.env.REACT_APP_API_KEY || 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
+const API_KEY = process.env.REACT_APP_API_KEY ;
+console.log(API_KEY);
 
 const symbols = [
   'BILI', 'BHAT', 'CCOEY', 'DDI', 'EA', 'GDC', 'GMGI', 'GRVY', 'GXAI',
