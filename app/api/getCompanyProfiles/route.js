@@ -10,8 +10,11 @@ const symbols = [
   'SOHU', 'TRUG', 'TTWO', 'UBSFY'
 ];
 
+async function fetchSymbolData(symbol, period) {
+  const queryOptions = { period };
+
   // Fetch historical data
-  const historicalData: HistoricalData[] = await yahooFinance.historical(symbol, queryOptions);
+  const historicalData = await yahooFinance.historical(symbol, queryOptions);
 
   // Fetch company profile
   const profile = await fetchCompanyProfile(symbol);
@@ -24,11 +27,21 @@ const symbols = [
   };
 }
 
+async function fetchCompanyProfile(symbol) {
+  // Replace with actual implementation to fetch company profile
+  // This is just a placeholder function
+  return {
+    name: "Company Name",
+    description: "Company Description",
+    sector: "Technology",
+  };
+}
+
 // API route handler
-export async function GET(req: NextRequest) {
+export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const period = searchParams.get('period') || '1y';
-  const results: SymbolData[] = [];
+  const results = [];
 
   try {
     for (const symbol of symbols) {
