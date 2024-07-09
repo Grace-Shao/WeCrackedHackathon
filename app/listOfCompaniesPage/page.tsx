@@ -16,7 +16,6 @@ const fetchCompanyProfile = async ({symbol}:{symbol:any}) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(`Error fetching company profile for ${symbol}:`, error);
     return null;
   }
 };
@@ -25,7 +24,6 @@ const fetchAllCompanyProfiles = async () => {
   try {
     const fetchPromises = symbols.map(symbol =>
       fetchCompanyProfile(symbol).catch(error => {
-        console.error(`Error fetching profile for ${symbol}:`, error);
         return null;
       })
     );
@@ -40,7 +38,6 @@ const fetchAllCompanyProfiles = async () => {
 
 export default async function Home() {
   const companyProfiles = await fetchAllCompanyProfiles();
-  console.log('companyProfiles:', companyProfiles);
   return (
 <main style={{ backgroundColor: '#101010' }} className="flex flex-col items-center justify-center text-white min-h-screen ">
       <Navbar />

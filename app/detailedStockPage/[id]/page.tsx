@@ -19,25 +19,25 @@ const fetchCompanyProfile = async ({symbol}:{symbol:any}) => {
   }
 };
 
-const fetchQuote = async (symbol) => {
+const fetchQuote = async ({symbol}:{symbol:any}) => {
   const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchNews = async (symbol) => {
+const fetchNews = async ({symbol}:{symbol:any}) => {
   const url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2024-06-01&to=2024-07-01&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchFinancials = async (symbol) => {
+const fetchFinancials = async ({symbol}:{symbol:any}) => {
   const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchHistoricalData = async (symbol) => {
+const fetchHistoricalData = async ({symbol}:{symbol:any}) => {
   const url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (!response.ok) {
