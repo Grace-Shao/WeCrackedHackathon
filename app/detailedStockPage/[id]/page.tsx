@@ -11,7 +11,32 @@ interface FetchParams {
   symbol: string;
 }
 
-const fetchCompanyProfile = async ({ symbol }: FetchParams) => {
+interface Quote {
+  c: number;
+  h: number;
+  l: number;
+  o: number;
+  pc: number;
+}
+
+interface NewsArticle {
+  headline: string;
+  summary: string;
+  url: string;
+}
+
+interface Financials {
+  // Define the structure of financials data
+}
+
+interface Profile {
+  ticker: string;
+  name: string;
+  shareOutstanding: number;
+  logo: string;
+}
+
+const fetchCompanyProfile = async ({ symbol }: FetchParams): Promise<Profile | null> => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
   try {
     const response = await fetch(url);
@@ -23,25 +48,25 @@ const fetchCompanyProfile = async ({ symbol }: FetchParams) => {
   }
 };
 
-const fetchQuote = async ({ symbol }: FetchParams) => {
+const fetchQuote = async ({ symbol }: FetchParams): Promise<Quote> => {
   const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchNews = async ({ symbol }: FetchParams) => {
+const fetchNews = async ({ symbol }: FetchParams): Promise<NewsArticle[]> => {
   const url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2024-06-01&to=2024-07-01&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchFinancials = async ({ symbol }: FetchParams) => {
+const fetchFinancials = async ({ symbol }: FetchParams): Promise<Financials> => {
   const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${API_KEY}`;
   const response = await fetch(url);
   return await response.json();
 };
 
-const fetchHistoricalData = async ({ symbol }: FetchParams) => {
+const fetchHistoricalData = async ({ symbol }: FetchParams): Promise<any[]> => {  // Define the correct type for historical data
   const url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (!response.ok) {
@@ -53,13 +78,13 @@ const fetchHistoricalData = async ({ symbol }: FetchParams) => {
 export default function ViewStock() {
   const params = useParams();
   const { id } = params;
-  const [quote, setQuote] = useState(null);
-  const [news, setNews] = useState([]);
-  const [financials, setFinancials] = useState(null);
-  const [historicalData, setHistoricalData] = useState([]);
+  const [quote, setQuote] = useState<Quote | null>(null);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [financials, setFinancials] = useState<Financials | null>(null);
+  const [historicalData, setHistoricalData] = useState<any[]>([]);  // Define the correct type for historical data
   const [period, setPeriod] = useState('1m');
-  const [visibleKeys, setVisibleKeys] = useState([{ value: 'buy', label: 'buy' }]);
-  const [profile, setProfile] = useState(null);
+  const [visibleKeys, setVisibleKeys] = useState<{ value: string; label: string }[]>([{ value: 'buy', label: 'buy' }]);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
     if (id) {
