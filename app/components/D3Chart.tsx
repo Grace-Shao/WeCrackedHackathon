@@ -1,9 +1,15 @@
-// components/D3Chart.js
+// components/D3Chart.tsx
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-const D3Chart = ({ data, visibleKeys }) => {
-  const svgRef = useRef();
+// Define the types for your props
+interface D3ChartProps {
+  data: Array<{ period: string; [key: string]: any }>; // Adjust the type according to your data structure
+  visibleKeys: string[];
+}
+
+const D3Chart: React.FC<D3ChartProps> = ({ data, visibleKeys }) => {
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     if (!Array.isArray(data)) return;
@@ -28,11 +34,11 @@ const D3Chart = ({ data, visibleKeys }) => {
 
     // Set up scales
     const x = d3.scaleTime()
-      .domain(d3.extent(data, d => d.date))
+      .domain(d3.extent(data, d => d.date) as [Date, Date])
       .range([0, width]);
 
     const y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d3.max(visibleKeys, key => d[key]))])
+      .domain([0, d3.max(data, d => d3.max(visibleKeys, key => d[key])) ?? 0])
       .nice()
       .range([height, 0]);
 
@@ -47,7 +53,7 @@ const D3Chart = ({ data, visibleKeys }) => {
       .call(d3.axisLeft(y));
 
     // Define line generator
-    const line = d3.line()
+    const line = d3.line<{ date: Date; value: number }>()
       .x(d => x(d.date))
       .y(d => y(d.value));
 
