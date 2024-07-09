@@ -63,13 +63,7 @@ export default function ViewStock() {
       fetchNews(id).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
       fetchCompanyProfile(id).then(setProfile);
       fetchFinancials(id).then(setFinancials);
-      fetchHistoricalData(id ).then(data => {
-        if (Array.isArray(data)) {
-          setHistoricalData(data);
-        } else {
-          setHistoricalData([]);
-        }
-      });
+      fetchHistoricalData(id ).then(setHistoricalData);
     }
   }, [id, period]);
 
