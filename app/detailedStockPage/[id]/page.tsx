@@ -5,7 +5,7 @@ import Navbar from '@/app/components/Navbar';
 import D3Chart from '@/app/components/D3Chart';
 import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 
-const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
+
 
 const fetchCompanyProfile = async (symbol) => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
