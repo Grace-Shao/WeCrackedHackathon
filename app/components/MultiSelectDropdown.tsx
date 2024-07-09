@@ -21,7 +21,7 @@ const options: Option[] = [
   { value: 'strongSell', label: 'strongSell' },
 ];
 
-export default function MultiSelectDropdown({ selectedOptions, setSelectedOptions }: MultiSelectDropdownProps) {
+export default function MultiSelectDropdown({ selectedOptions, setSelectedOptions }: { selectedOptions:any, setSelectedOptions: any }) {
   const handleChange = (selected: Option[] | null) => {
     setSelectedOptions(selected || []);
   };
