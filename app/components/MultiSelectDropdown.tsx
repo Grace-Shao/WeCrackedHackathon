@@ -7,11 +7,6 @@ export type Option = {
   label: string;
 };
 
-// Define the props type for the component
-export interface MultiSelectDropdownProps {
-  selectedOptions: Option[];
-  setSelectedOptions: (options: Option[]) => void;
-}
 
 const options: Option[] = [
   { value: 'buy', label: 'buy' },
