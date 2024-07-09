@@ -10,7 +10,7 @@ export type Option = {
 // Define the props type for the component
 export interface MultiSelectDropdownProps {
   selectedOptions: Option[];
-  setSelectedOptions: React.Dispatch<React.SetStateAction<Option[]>>;
+  setSelectedOptions: (options: Option[]) => void;
 }
 
 const options: Option[] = [
@@ -21,7 +21,7 @@ const options: Option[] = [
   { value: 'strongSell', label: 'strongSell' },
 ];
 
-const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ selectedOptions, setSelectedOptions }) => {
+export default function MultiSelectDropdown({ selectedOptions, setSelectedOptions }: MultiSelectDropdownProps) {
   const handleChange = (selected: Option[] | null) => {
     setSelectedOptions(selected || []);
   };
@@ -35,6 +35,4 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ selectedOptio
       className="text-black"
     />
   );
-};
-
-export default MultiSelectDropdown;
+}
