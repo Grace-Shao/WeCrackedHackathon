@@ -7,7 +7,7 @@ import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 
 
 
-const fetchCompanyProfile = async (symbol) => {
+const fetchCompanyProfile = async ({symbol}:{symbol:any}) => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
   try {
     const response = await fetch(url);
