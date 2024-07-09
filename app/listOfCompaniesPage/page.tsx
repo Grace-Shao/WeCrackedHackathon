@@ -2,19 +2,14 @@ import Link from "next/link";
 import CompanyCard from "../components/CompanyCard";
 import Navbar from "../components/Navbar";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
+const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
 const symbols = [
   'BILI', 'BHAT', 'CCOEY', 'DDI', 'EA', 'GDC', 'GMGI', 'GRVY', 'GXAI',
   'MSGM', 'MYPS', 'NEXOY', 'NTDOY', 'NTES', 'PLTK', 'RBLX', 'SKLZ',
   'SOHU', 'TRUG', 'TTWO', 'UBSFY'
 ];
 
-interface FetchParams {
-  symbol: string;
-}
-
-const fetchCompanyProfile = async ({ symbol }: FetchParams) => {
+const fetchCompanyProfile = async (symbol:any) => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
   try {
     const response = await fetch(url);
@@ -29,7 +24,7 @@ const fetchCompanyProfile = async ({ symbol }: FetchParams) => {
 const fetchAllCompanyProfiles = async () => {
   try {
     const fetchPromises = symbols.map(symbol =>
-      fetchCompanyProfile({ symbol }).catch(error => {
+      fetchCompanyProfile(symbol).catch(error => {
         console.error(`Error fetching profile for ${symbol}:`, error);
         return null;
       })
@@ -46,13 +41,13 @@ const fetchAllCompanyProfiles = async () => {
 export default async function Home() {
   const companyProfiles = await fetchAllCompanyProfiles();
   return (
-    <main style={{ backgroundColor: '#101010' }} className="flex flex-col items-center justify-center text-white min-h-screen">
+<main style={{ backgroundColor: '#101010' }} className="flex flex-col items-center justify-center text-white min-h-screen ">
       <Navbar />
       <h1 className="text-3xl font-bold my-8" style={{ color: '#C9C9C9' }}>
-        List of Video Game Company Stocks
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-4/5" style={{ margin: '10px' }}>
-        {companyProfiles.map((profile: any) => (
+  List of Video Game Company Stocks
+</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-4/5" style = {{margin: '10px'}}>
+        {companyProfiles.map((profile) => (
           <CompanyCard
             key={profile.ticker}
             ticker={profile.ticker}
