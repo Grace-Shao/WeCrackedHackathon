@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import yahooFinance from 'yahoo-finance2';
 
-const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 
 // const fetchCompanyProfile = async (symbol) => {

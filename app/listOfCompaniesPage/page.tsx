@@ -2,6 +2,7 @@ import Link from "next/link";
 import CompanyCard from "../components/CompanyCard";
 import Navbar from "../components/Navbar";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const symbols = [
   'BILI', 'BHAT', 'CCOEY', 'DDI', 'EA', 'GDC', 'GMGI', 'GRVY', 'GXAI',

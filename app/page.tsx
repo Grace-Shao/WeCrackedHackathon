@@ -3,6 +3,7 @@ import Link from "next/link";
 import gamestock1 from "../public/gamestock1.png";
 import Navbar from "./components/Navbar";
 
+
 export default function Home() {
   return (
     <main>
