@@ -1,5 +1,5 @@
 // components/D3Chart.tsx
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
 // Define the types for your props
@@ -109,7 +109,22 @@ const D3Chart: React.FC<D3ChartProps> = ({ data, visibleKeys }) => {
   return (
     <div>
       <svg ref={svgRef}></svg>
-      <div id="tooltip" style={{ position: 'absolute', textAlign: 'center', width: '120px', height: 'auto', padding: '8px', font: '12px sans-serif', background: 'lightsteelblue', border: '0px', borderRadius: '8px', pointerEvents: 'none', opacity: 0 }}></div>
+      <div
+        id="tooltip"
+        style={{
+          position: 'absolute',
+          textAlign: 'center',
+          width: '120px',
+          height: 'auto',
+          padding: '8px',
+          font: '12px sans-serif',
+          background: 'lightsteelblue',
+          border: '0px',
+          borderRadius: '8px',
+          pointerEvents: 'none',
+          opacity: 0
+        }}
+      ></div>
     </div>
   );
 };

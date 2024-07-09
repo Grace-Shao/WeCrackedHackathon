@@ -1,7 +1,20 @@
-// components/MultiSelectDropdown.js
+// components/MultiSelectDropdown.tsx
+import React from 'react';
 import Select from 'react-select';
 
-const options = [
+// Define the type for the options
+interface Option {
+  value: string;
+  label: string;
+}
+
+// Define the props type for the component
+interface MultiSelectDropdownProps {
+  selectedOptions: Option[];
+  setSelectedOptions: React.Dispatch<React.SetStateAction<Option[]>>;
+}
+
+const options: Option[] = [
   { value: 'buy', label: 'buy' },
   { value: 'hold', label: 'hold' },
   { value: 'sell', label: 'sell' },
@@ -9,8 +22,8 @@ const options = [
   { value: 'strongSell', label: 'strongSell' },
 ];
 
-export default function MultiSelectDropdown({ selectedOptions, setSelectedOptions }) {
-  const handleChange = (selected) => {
+const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ selectedOptions, setSelectedOptions }) => {
+  const handleChange = (selected: Option[] | null) => {
     setSelectedOptions(selected || []);
   };
 
@@ -23,4 +36,6 @@ export default function MultiSelectDropdown({ selectedOptions, setSelectedOption
       className="text-black"
     />
   );
-}
+};
+
+export default MultiSelectDropdown;
