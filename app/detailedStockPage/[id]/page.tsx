@@ -9,6 +9,8 @@ import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 const API_KEY = String(process.env.REACT_APP_API_KEY);
 
 
+export default function ViewStock() {
+
 interface FetchParams {
   symbol: string;
 }
@@ -37,9 +39,6 @@ interface Profile {
   shareOutstanding: number;
   logo: string;
 }
-
-export default function ViewStock() {
-
   const API_KEY = process.env.REACT_APP_API_KEY ;
 
   console.log(API_KEY);
