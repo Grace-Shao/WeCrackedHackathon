@@ -5,7 +5,7 @@ import Navbar from '@/app/components/Navbar';
 import D3Chart from '@/app/components/D3Chart';
 import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 
-const API_KEY = String(process.env.NEXT_PUBLIC_API_KEY);
+const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
 
 interface FetchParams {
   symbol: string;
