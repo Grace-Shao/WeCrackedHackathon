@@ -36,7 +36,7 @@ interface Profile {
   logo: string;
 }
 
-const fetchCompanyProfile = async (symbol: any): Promise<Profile | null> => {
+const fetchCompanyProfile = async (symbol: string): Promise<Profile | null> => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -46,7 +46,7 @@ const fetchCompanyProfile = async (symbol: any): Promise<Profile | null> => {
   return null;
 };
 
-const fetchQuote = async (symbol: any): Promise<Quote | null> => {
+const fetchQuote = async (symbol: string): Promise<Quote | null> => {
   const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -56,7 +56,7 @@ const fetchQuote = async (symbol: any): Promise<Quote | null> => {
   return null;
 };
 
-const fetchNews = async (symbol: any): Promise<NewsArticle[]> => {
+const fetchNews = async (symbol: string): Promise<NewsArticle[]> => {
   const url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2024-06-01&to=2024-07-01&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -66,7 +66,7 @@ const fetchNews = async (symbol: any): Promise<NewsArticle[]> => {
   return [];
 };
 
-const fetchFinancials = async (symbol: any): Promise<Financials | null> => {
+const fetchFinancials = async (symbol: string): Promise<Financials | null> => {
   const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -76,7 +76,7 @@ const fetchFinancials = async (symbol: any): Promise<Financials | null> => {
   return null;
 };
 
-const fetchHistoricalData = async (symbol: any): Promise<any[]> => {
+const fetchHistoricalData = async (symbol: string): Promise<any[]> => {
   const url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -89,6 +89,7 @@ const fetchHistoricalData = async (symbol: any): Promise<any[]> => {
 export default function ViewStock() {
   const params = useParams();
   const { id } = params;
+  const symbol = Array.isArray(id) ? id[0] : id; // Ensure id is treated as a string
   const [quote, setQuote] = useState<Quote | null>(null);
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [financials, setFinancials] = useState<Financials | null>(null);
@@ -98,14 +99,14 @@ export default function ViewStock() {
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    if (id) {
-      fetchQuote(id).then(setQuote);
-      fetchNews(id).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
-      fetchCompanyProfile(id).then(setProfile);
-      fetchFinancials(id).then(setFinancials);
-      fetchHistoricalData(id).then(setHistoricalData);
+    if (symbol) {
+      fetchQuote(symbol).then(setQuote);
+      fetchNews(symbol).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
+      fetchCompanyProfile(symbol).then(setProfile);
+      fetchFinancials(symbol).then(setFinancials);
+      fetchHistoricalData(symbol).then(setHistoricalData);
     }
-  }, [id, period]);
+  }, [symbol, period]);
 
   return (
     <div className="min-h-screen bg-gray-900 text-white" style={{ backgroundColor: '#101010' }}>
