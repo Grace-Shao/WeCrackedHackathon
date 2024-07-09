@@ -2,7 +2,7 @@ import Link from "next/link";
 import CompanyCard from "../components/CompanyCard";
 import Navbar from "../components/Navbar";
 
-const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
+
 const symbols = [
   'BILI', 'BHAT', 'CCOEY', 'DDI', 'EA', 'GDC', 'GMGI', 'GRVY', 'GXAI',
   'MSGM', 'MYPS', 'NEXOY', 'NTDOY', 'NTES', 'PLTK', 'RBLX', 'SKLZ',
