@@ -1,12 +1,11 @@
 import React from 'react';
-import Select from 'react-select';
+import Select, { MultiValue, ActionMeta } from 'react-select';
 
 // Define the type for the options
 export type Option = {
   value: string;
   label: string;
 };
-
 
 const options: Option[] = [
   { value: 'buy', label: 'buy' },
@@ -16,9 +15,14 @@ const options: Option[] = [
   { value: 'strongSell', label: 'strongSell' },
 ];
 
-export default function MultiSelectDropdown({ selectedOptions, setSelectedOptions }: { selectedOptions:any, setSelectedOptions: any }) {
-  const handleChange = (selected: Option[] | null) => {
-    setSelectedOptions(selected || []);
+interface MultiSelectDropdownProps {
+  selectedOptions: Option[];
+  setSelectedOptions: React.Dispatch<React.SetStateAction<Option[]>>;
+}
+
+const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ selectedOptions, setSelectedOptions }:{ selectedOptions:any, setSelectedOptions:any }) => {
+  const handleChange = (newValue: MultiValue<Option>, actionMeta: ActionMeta<Option>) => {
+    setSelectedOptions(newValue as Option[]);
   };
 
   return (
@@ -30,4 +34,6 @@ export default function MultiSelectDropdown({ selectedOptions, setSelectedOption
       className="text-black"
     />
   );
-}
+};
+
+export default MultiSelectDropdown;
