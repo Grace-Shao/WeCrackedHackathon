@@ -7,9 +7,36 @@ import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 
 const API_KEY = String(process.env.NEXT_PUBLIC_API_KEY);
 
+interface FetchParams {
+  symbol: string;
+}
 
+interface Quote {
+  c: number;
+  h: number;
+  l: number;
+  o: number;
+  pc: number;
+}
 
-const fetchCompanyProfile = async (symbol: string): Promise<Profile | null> => {
+interface NewsArticle {
+  headline: string;
+  summary: string;
+  url: string;
+}
+
+interface Financials {
+  // Define the structure of financials data
+}
+
+interface Profile {
+  ticker: string;
+  name: string;
+  shareOutstanding: number;
+  logo: string;
+}
+
+const fetchCompanyProfile = async (symbol: any): Promise<Profile | null> => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -19,14 +46,17 @@ const fetchCompanyProfile = async (symbol: string): Promise<Profile | null> => {
   return null;
 };
 
-const fetchQuote = async (symbol: any) => {
+const fetchQuote = async (symbol: any): Promise<Quote | null> => {
   const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
+  if (response.ok) {
+    return await response.json();
+  }
   console.error(`Error fetching quote for ${symbol}:`, response.statusText);
   return null;
 };
 
-const fetchNews = async (symbol: any) => {
+const fetchNews = async (symbol: any): Promise<NewsArticle[]> => {
   const url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2024-06-01&to=2024-07-01&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -36,7 +66,7 @@ const fetchNews = async (symbol: any) => {
   return [];
 };
 
-const fetchFinancials = async (symbol: any) => {
+const fetchFinancials = async (symbol: any): Promise<Financials | null> => {
   const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -46,7 +76,7 @@ const fetchFinancials = async (symbol: any) => {
   return null;
 };
 
-const fetchHistoricalData = async (symbol: any)=> {
+const fetchHistoricalData = async (symbol: any): Promise<any[]> => {
   const url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -56,46 +86,17 @@ const fetchHistoricalData = async (symbol: any)=> {
   return [];
 };
 
-
-
-interface Profile {
-  ticker: string;
-  name: string;
-  shareOutstanding: number;
-  logo: string;
-}
-
 export default function ViewStock() {
   const params = useParams();
   const { id } = params;
-  const [quote, setQuote] = useState(null);
-  const [news, setNews] = useState([]);
-  const [financials, setFinancials] = useState(null);
-  const [historicalData, setHistoricalData] = useState([]);
+  const [quote, setQuote] = useState<Quote | null>(null);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [financials, setFinancials] = useState<Financials | null>(null);
+  const [historicalData, setHistoricalData] = useState<any[]>([]);
   const [period, setPeriod] = useState('1m');
-  const [visibleKeys, setVisibleKeys] = useState([{ value: 'buy', label: 'buy' }]);
+  const [visibleKeys, setVisibleKeys] = useState<{ value: string; label: string }[]>([{ value: 'buy', label: 'buy' }]);
   const [profile, setProfile] = useState<Profile | null>(null);
 
-
-  // const params = useParams();
-  // const { id } = params;
-  // const [quote, setQuote] = useState(null);
-  // const [news, setNews] = useState([]);
-  // const [financials, setFinancials] = useState(null);
-  // const [historicalData, setHistoricalData] = useState([]);
-  // const [period, setPeriod] = useState('1m');
-  // const [visibleKeys, setVisibleKeys] = useState([{ value: 'buy', label: 'buy' }]);
-  // const [profile, setProfile] = useState(null);
-
-  // useEffect(() => {
-  //   if (id || period) {
-  //     fetchQuote(id).then(setQuote);
-  //     fetchNews(id).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
-  //     fetchCompanyProfile(id).then(setProfile);
-  //     fetchFinancials(id).then(setFinancials);
-  //     fetchHistoricalData(id ).then(setHistoricalData);
-  //   }
-  // }, [id, period]);
   useEffect(() => {
     if (id) {
       fetchQuote(id).then(setQuote);
