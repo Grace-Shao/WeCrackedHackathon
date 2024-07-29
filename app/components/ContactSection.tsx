@@ -4,21 +4,18 @@ import Navbar from "./Navbar";
 export default function ContactSection() {
     const contacts = [
         {
-            title: 'Frontend',
+            title: 'Frontend Engineers',
             description: 'Grace, Kelechi, Alex',
-            linkText: 'Contact us',
             imgSrc: '/support.png'
         },
         {
-            title: 'Backend',
+            title: 'Backend Engineers',
             description: 'Sai, Grace',
-            linkText: 'We are friendly',
             imgSrc: '/billing.png'
         },
         {
             title: 'Video',
             description: 'Grace, Kelechi, Alex',
-            linkText: 'Thank you!!',
             imgSrc: '/advice.png'
         },
         
