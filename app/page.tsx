@@ -9,11 +9,6 @@ export default function Home() {
     <main>
       <Navbar />
       <h1 className="flex flex-col items-center justify-center text=2xl">
-
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <br></br>
         <br></br>
       <div >
@@ -25,21 +20,18 @@ export default function Home() {
       
         <h2>
           <div className="flex justify-center " style={{ fontSize: '1.5rem'}}>
-            <div className="slide-down" style={{ color: '#C9C9BD' }}>
+            <div className = "slide-down" style={{color: "#f397c6", textAlign: "center", fontFamily: "system-ui", fontWeight: 400, textShadow: "1px 0.5px #5b5ff0"}}>
             Power up your portfolio with video game stock investments. Roblox, Nintendo, etc.
-            
             </div>
           </div>
           
         <div className="fade-in">
-        <br></br>
-        <br></br>
-        <br></br>
+        
         <div className="flex space-x-4 fade-in p-4 justify-center">
           <div className="card rounded-lg ">
             <Link href="/listOfCompaniesPage">
               <button className="text-white py-2 px-4 rounded 
-              mr-2 bg-grey-900 hover:bg-pink-500 hover:scale-105 transition-all duration-300"
+              mr-2 bg-grey-900 hover:bg-pink-300 hover:scale-105 transition-all duration-300"
               >Explore Stocks!</button>
             </Link>
           </div>
@@ -49,9 +41,6 @@ export default function Home() {
       <section className="py-8 text-center">
         <div className="flex items-center justify-center space-x-8">
           <div className="marine-invest">
-            <br></br>
-            <br>
-            </br>
             <Image src="/row.png" alt="Roblox Logo" width={70} height={70} />
           </div>
           <div className="marine-invest">

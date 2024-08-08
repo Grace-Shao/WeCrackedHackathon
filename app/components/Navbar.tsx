@@ -9,13 +9,13 @@ export default function Navbar() {
                 <div className="flex items-center space-x-8">
                     <Image src="/gamestock logo.png" alt="GameStock Logo" width={60} height={60} />
                     <Link legacyBehavior href="/">
-                        <a className="text-lg hover:text-white hover:underline"  style={{ color: '#C9C9BD' }}>Home</a>
+                        <a className="hover:underline text-white font-mono" style = {{display: 'inline-flex', margin: "0 10px"}}>home </a>
                     </Link>
                     <Link legacyBehavior href="/listOfCompaniesPage">
-                        <a className="text-lg text-black-800 hover:text-white hover:underline"  style={{ color:'#C9C9BD'}}>Explore</a>
-                    </Link>
+                        <a className="hover:underline text-white font-mono" style = {{display: 'inline-flex', margin: "0 10px"}}>explore </a>
+                    </Link> 
                     <Link legacyBehavior href="/contact">
-                    <a className="text-lg hover:underline hover:text-pink-400" style={{ color: '#C9C9BD' }}>Contact</a>
+                        <a className="hover:underline text-white font-mono" style = {{display: 'inline-flex', margin: "0 10px"}}>contact </a>
                     </Link>
                 </div>
             </div>
