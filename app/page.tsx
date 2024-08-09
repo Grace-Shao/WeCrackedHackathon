@@ -38,6 +38,9 @@ export default function Home() {
           </div>
           </div>
       </h2>
+      <br></br>
+      <br></br>
+      <br></br>
       <section className="py-8 text-center">
         <div className="flex items-center justify-center space-x-8">
           <div className="marine-invest">
