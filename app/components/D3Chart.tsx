@@ -1,15 +1,9 @@
-// components/D3Chart.tsx
-import React, { useEffect, useRef } from 'react';
+// components/D3Chart.js
+import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-// Define the types for your props
-interface D3ChartProps {
-  data: Array<{ period: string; [key: string]: any }>; // Adjust the type according to your data structure
-  visibleKeys: string[];
-}
-
-const D3Chart: React.FC<D3ChartProps> = ({ data, visibleKeys }) => {
-  const svgRef = useRef<SVGSVGElement>(null);
+const D3Chart = ({ data, visibleKeys }) => {
+  const svgRef = useRef();
 
   useEffect(() => {
     if (!Array.isArray(data)) return;
@@ -34,11 +28,11 @@ const D3Chart: React.FC<D3ChartProps> = ({ data, visibleKeys }) => {
 
     // Set up scales
     const x = d3.scaleTime()
-      .domain(d3.extent(data, d => d.date) as [Date, Date])
+      .domain(d3.extent(data, d => d.date))
       .range([0, width]);
 
     const y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d3.max(visibleKeys, key => d[key])) ?? 0])
+      .domain([0, d3.max(data, d => d3.max(visibleKeys, key => d[key]))])
       .nice()
       .range([height, 0]);
 
@@ -53,7 +47,7 @@ const D3Chart: React.FC<D3ChartProps> = ({ data, visibleKeys }) => {
       .call(d3.axisLeft(y));
 
     // Define line generator
-    const line = d3.line<{ date: Date; value: number }>()
+    const line = d3.line()
       .x(d => x(d.date))
       .y(d => y(d.value));
 
@@ -109,22 +103,7 @@ const D3Chart: React.FC<D3ChartProps> = ({ data, visibleKeys }) => {
   return (
     <div>
       <svg ref={svgRef}></svg>
-      <div
-        id="tooltip"
-        style={{
-          position: 'absolute',
-          textAlign: 'center',
-          width: '120px',
-          height: 'auto',
-          padding: '8px',
-          font: '12px sans-serif',
-          background: 'lightsteelblue',
-          border: '0px',
-          borderRadius: '8px',
-          pointerEvents: 'none',
-          opacity: 0
-        }}
-      ></div>
+      <div id="tooltip" style={{ position: 'absolute', textAlign: 'center', width: '120px', height: 'auto', padding: '8px', font: '12px sans-serif', background: 'lightsteelblue', border: '0px', borderRadius: '8px', pointerEvents: 'none', opacity: 0 }}></div>
     </div>
   );
 };
