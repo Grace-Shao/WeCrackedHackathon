@@ -3,22 +3,24 @@ import CompanyCard from "../components/CompanyCard";
 import Navbar from "../components/Navbar";
 
 const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
+
+
+
+export default async function Home() {
+  const API_KEY = process.env.REACT_APP_API_KEY ;
+  
 const symbols = [
   'BILI', 'BHAT', 'CCOEY', 'DDI', 'EA', 'GDC', 'GMGI', 'GRVY', 'GXAI',
   'MSGM', 'MYPS', 'NEXOY', 'NTDOY', 'NTES', 'PLTK', 'RBLX', 'SKLZ',
   'SOHU', 'TRUG', 'TTWO', 'UBSFY'
 ];
 
-const fetchCompanyProfile = async (symbol) => {
+const fetchCompanyProfile = async (symbol:any) => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
-  try {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-  } catch (error) {
-    console.error(`Error fetching company profile for ${symbol}:`, error);
-    return null;
-  }
+  
 };
 
 const fetchAllCompanyProfiles = async () => {
@@ -38,9 +40,7 @@ const fetchAllCompanyProfiles = async () => {
   }
 };
 
-export default async function Home() {
   const companyProfiles = await fetchAllCompanyProfiles();
-  console.log('companyProfiles:', companyProfiles);
   return (
 <main style={{ backgroundColor: '#101010' }} className="flex flex-col items-center justify-center text-white min-h-screen ">
       <Navbar />

@@ -7,74 +7,109 @@ import MultiSelectDropdown from '@/app/components/MultiSelectDropdown';
 
 const API_KEY = 'cq4p1i9r01qhh2h69aigcq4p1i9r01qhh2h69aj0';
 
-const fetchCompanyProfile = async (symbol) => {
+interface FetchParams {
+  symbol: string;
+}
+
+interface Quote {
+  c: number;
+  h: number;
+  l: number;
+  o: number;
+  pc: number;
+}
+
+interface NewsArticle {
+  headline: string;
+  summary: string;
+  url: string;
+}
+
+interface Financials {
+  // Define the structure of financials data
+}
+
+interface Profile {
+  ticker: string;
+  name: string;
+  shareOutstanding: number;
+  logo: string;
+}
+
+const fetchCompanyProfile = async (symbol: string): Promise<Profile | null> => {
   const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${API_KEY}`;
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(`Error fetching company profile for ${symbol}:`, error);
-    return null;
+  const response = await fetch(url);
+  if (response.ok) {
+    return await response.json();
   }
+  console.error(`Error fetching company profile for ${symbol}:`, response.statusText);
+  return null;
 };
 
-const fetchQuote = async (symbol) => {
+const fetchQuote = async (symbol: string): Promise<Quote | null> => {
   const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
-  return await response.json();
+  if (response.ok) {
+    return await response.json();
+  }
+  console.error(`Error fetching quote for ${symbol}:`, response.statusText);
+  return null;
 };
 
-const fetchNews = async (symbol) => {
+const fetchNews = async (symbol: string): Promise<NewsArticle[]> => {
   const url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2024-06-01&to=2024-07-01&token=${API_KEY}`;
   const response = await fetch(url);
-  return await response.json();
+  if (response.ok) {
+    return await response.json();
+  }
+  console.error(`Error fetching news for ${symbol}:`, response.statusText);
+  return [];
 };
 
-const fetchFinancials = async (symbol) => {
+const fetchFinancials = async (symbol: string): Promise<Financials | null> => {
   const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${API_KEY}`;
   const response = await fetch(url);
-  return await response.json();
+  if (response.ok) {
+    return await response.json();
+  }
+  console.error(`Error fetching financials for ${symbol}:`, response.statusText);
+  return null;
 };
 
-const fetchHistoricalData = async (symbol) => {
+const fetchHistoricalData = async (symbol: string): Promise<any[]> => {
   const url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${API_KEY}`;
   const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+  if (response.ok) {
+    return await response.json();
   }
-  return await response.json();
+  console.error(`Error fetching historical data for ${symbol}:`, response.statusText);
+  return [];
 };
 
 export default function ViewStock() {
   const params = useParams();
   const { id } = params;
-  const [quote, setQuote] = useState(null);
-  const [news, setNews] = useState([]);
-  const [financials, setFinancials] = useState(null);
-  const [historicalData, setHistoricalData] = useState([]);
+  const symbol = Array.isArray(id) ? id[0] : id; // Ensure id is treated as a string
+  const [quote, setQuote] = useState<Quote | null>(null);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [financials, setFinancials] = useState<Financials | null>(null);
+  const [historicalData, setHistoricalData] = useState<any[]>([]);
   const [period, setPeriod] = useState('1m');
-  const [visibleKeys, setVisibleKeys] = useState([{ value: 'buy', label: 'buy' }]);
-  const [profile, setProfile] = useState(null);
+  const [visibleKeys, setVisibleKeys] = useState<{ value: string; label: string }[]>([{ value: 'buy', label: 'buy' }]);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    if (id) {
-      fetchQuote(id).then(setQuote);
-      fetchNews(id).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
-      fetchCompanyProfile(id).then(setProfile);
-      fetchFinancials(id).then(setFinancials);
-      fetchHistoricalData(id, period).then(data => {
-        if (Array.isArray(data)) {
-          setHistoricalData(data);
-        } else {
-          setHistoricalData([]);
-        }
-      });
+    if (symbol) {
+      fetchQuote(symbol).then(setQuote);
+      fetchNews(symbol).then(data => setNews(data.slice(0, 5))); // Limit to 5 news articles
+      fetchCompanyProfile(symbol).then(setProfile);
+      fetchFinancials(symbol).then(setFinancials);
+      fetchHistoricalData(symbol).then(setHistoricalData);
     }
-  }, [id, period]);
+  }, [symbol, period]);
 
   return (
-  <div className="min-h-screen bg-gray-900 text-white" style={{ backgroundColor: '#101010' }}>
+    <div className="min-h-screen bg-gray-900 text-white" style={{ backgroundColor: '#101010' }}>
       <Navbar />
       <div className="container mx-auto py-8 px-4 flex flex-wrap">
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
@@ -114,7 +149,7 @@ export default function ViewStock() {
             {news.length > 0 ? (
               news.map((article, i) => (
                 <div key={i} className="border-4 shadow-lg rounded-lg overflow-hidden border-slate-300 hover:scale-105 transition-transform duration-500"
-  style={{ backgroundColor: '#1D1D1F', borderColor: '#383839', margin: '10px' }}>
+                  style={{ backgroundColor: '#1D1D1F', borderColor: '#383839', margin: '10px' }}>
                   <div className="p-6">
                     <h2 className="text-2xl font-bold text-white mb-2">
                       <a href={article.url} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition duration-300 ease-in-out text-white">{article.headline}</a>
