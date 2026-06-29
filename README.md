@@ -1,3 +1,8 @@
+https://main--gamestockwebsite.netlify.app/
+
+<img width="948" height="531" alt="image" src="https://github.com/user-attachments/assets/ea90796c-adad-4552-8493-5db61a061c22" />
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
