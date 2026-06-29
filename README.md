@@ -1,6 +1,14 @@
+## GameStock 
+
+Web app that streamlines stock analysis for 25+ video game companies, providing real-time prices, news updates, company insights, and buy/sell recommendations through a clean, user-friendly interface.
+
 https://main--gamestockwebsite.netlify.app/
 
-<img width="948" height="531" alt="image" src="https://github.com/user-attachments/assets/ea90796c-adad-4552-8493-5db61a061c22" />
+# 🏆 2nd Place @ [Next.js Hackathon 2024](https://devpost.com/software/gamestock-a8u7zm):
+<br>
+<img width="800" height="604" alt="image" src="https://github.com/user-attachments/assets/b17ab51a-9213-47db-beea-12ceca69d63c" />
+
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
